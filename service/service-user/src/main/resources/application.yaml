@@ -12,7 +12,7 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: 192.168.75.132:8080
+        dashboard: 192.168.75.132:8858
     openfeign:
       lazy-attributes-resolution: true
       client:
@@ -21,21 +21,6 @@ spring:
             connectTimeout: 30000
             readTimeout: 30000
             loggerLevel: basic
-#  kafka:
-#    bootstrap-servers: 39.98.123.211:9092
-#    producer:
-#      retries: 3  #设置大于0的值，则客户端会将发送失败的记录重新发送
-#      acks: 1
-#      batch-size: 16384
-#      buffer-memory: 33554432
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-#    consumer:
-#      group-id: service-user
-#      enable-auto-commit: true
-#      auto-offset-reset: earliest
-#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   data:
     redis:
       host: 192.168.75.132
@@ -70,11 +55,16 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-wechat:
-  login:
-    #小程序授权登录
-    appId: wxffafd4cb6a9c31a9  # 小程序微信公众平台appId
-    appSecret: 054f93758f2e5f0fdb3e4cf9ef69e854  # 小程序微信公众平台api秘钥
+# wechat:
+#   login:
+#     #小程序授权登录
+#     appId: wxffafd4cb6a9c31a9  # 小程序微信公众平台appId
+#     appSecret: 054f93758f2e5f0fdb3e4cf9ef69e854  # 小程序微信公众平台api秘钥
+wx:
+  miniapp:
+    appid: wxffafd4cb6a9c31a9
+    secret: 054f93758f2e5f0fdb3e4cf9ef69e854
+    msgDataFormat: JSON
 seata:
   tx-service-group: tx_glsx_group
   service:

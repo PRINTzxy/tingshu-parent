@@ -42,7 +42,7 @@ public class VodServiceImpl implements VodService {
         VodUploadResponse response = client.upload(vodConstantProperties.getRegion(), request);
         //创建map 对象
         Map<String, Object> map = new HashMap<>();
-        map.put("mediaFilePath",response.getFileId());
+        map.put("mediaFileId",response.getFileId());
         map.put("mediaUrl",response.getMediaUrl());
         return map;
     }

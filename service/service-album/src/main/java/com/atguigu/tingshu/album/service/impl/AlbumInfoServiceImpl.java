@@ -75,7 +75,7 @@ public class AlbumInfoServiceImpl extends ServiceImpl<AlbumInfoMapper, AlbumInfo
     @Override
     public IPage<AlbumListVo> findUserAlbumPage(Integer page, Integer limit, AlbumInfoQuery albumInfoQuery) {
         Page<AlbumListVo> page1 = new Page<>(page, limit);
-        albumInfoQuery.setUserId(1L);
+        albumInfoQuery.setUserId(AuthContextHolder.getUserId()==null?1:AuthContextHolder.getUserId());
         return albumInfoMapper.findUserAlumnPage(page1,albumInfoQuery);
     }
 

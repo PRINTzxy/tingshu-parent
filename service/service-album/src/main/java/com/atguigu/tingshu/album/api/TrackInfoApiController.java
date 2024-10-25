@@ -3,6 +3,7 @@ package com.atguigu.tingshu.album.api;
 import com.atguigu.tingshu.album.service.TrackInfoService;
 import com.atguigu.tingshu.album.service.VodService;
 import com.atguigu.tingshu.album.service.impl.VodServiceImpl;
+import com.atguigu.tingshu.common.login.GuiGuLogin;
 import com.atguigu.tingshu.common.result.Result;
 import com.atguigu.tingshu.common.util.AuthContextHolder;
 import com.atguigu.tingshu.model.album.AlbumInfo;
@@ -42,13 +43,15 @@ public class TrackInfoApiController {
 		return Result.ok(map);
 	}
 
+	@GuiGuLogin
 	@Operation(summary = "新增声音")
-	@PostMapping("saveTrackInfo")
-	public Result saveTrackInfo(@RequestBody @Validated TrackInfoVo trackInfoVo){
+	@PostMapping("/saveTrackInfo")
+	public Result saveTrackInfo(@RequestBody TrackInfoVo trackInfoVo){
 		this.trackInfoService.saveTrackInfo(trackInfoVo);
 		return Result.ok();
 	}
 
+	@GuiGuLogin
 	@Operation(summary = "获取当前用户声音分页列表")
 	@PostMapping("/findUserTrackPage/{page}/{limit}")
 	public Result<IPage<TrackListVo>> findUserTrackPage(@Parameter(name = "page",description = "页码", required = true) @PathVariable("page")Long page,
@@ -68,6 +71,7 @@ public class TrackInfoApiController {
 		return Result.ok(trackInfo);
 	}
 
+	@GuiGuLogin
 	@Operation(summary = "修改声音")
 	@PutMapping("updateTrackInfo/{id}")
 	public Result updateById(@PathVariable Long id, @RequestBody @Validated TrackInfoVo trackInfoVo) {
@@ -76,6 +80,7 @@ public class TrackInfoApiController {
 		return Result.ok();
 	}
 
+	@GuiGuLogin
 	@Operation(summary = "删除声音")
 	@DeleteMapping("removeTrackInfo/{id}")
 	public Result removeTrackInfo(@PathVariable Long id){
