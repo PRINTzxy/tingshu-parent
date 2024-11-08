@@ -12,7 +12,7 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: localhost:8080
+        dashboard: 192.168.75.132:8058
     openfeign:
       lazy-attributes-resolution: true
       client:
@@ -23,7 +23,7 @@ spring:
             loggerLevel: basic
   data:
     redis:
-      host: localhost
+      host: 192.168.75.132
       port: 6379
       database: 0
       timeout: 1800000
@@ -37,9 +37,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://139.198.104.58:3306/tingshu_live?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=true
+    url: jdbc:mysql://192.168.75.132:33310/tingshu_live?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=true
     username: root
-    password: shangguigu@QY123
+    password: 123456
     hikari:
       connection-test-query: SELECT 1
       connection-timeout: 60000
@@ -53,10 +53,10 @@ spring:
     time-zone: GMT+8
 live:
   #域名管理中点击推流域名-->推流配置-->鉴权配置-->主KEY
-  pushKey: 89a97ccfdca7784b8b75fcd486f63520
+  pushKey: 76e1b8ba9d7970e54207e746a2e71889
   #云直播控制台配置的推流域名
-  pushDomain: 166120.livepush.myqcloud.com
+  pushDomain: 206217.push.tlivecloud.com
   #云直播控制台配置的拉流域名
-  pullDomain: txplay.atguigu.cn
+  pullDomain: lxfplay.atguigu.cn
   #直播SDK-->应用管理-->自己创建应用中的应用名称
-  AppName: live
+  AppName: fengge

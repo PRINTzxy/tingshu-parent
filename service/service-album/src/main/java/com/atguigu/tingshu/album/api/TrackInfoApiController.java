@@ -9,14 +9,17 @@ import com.atguigu.tingshu.common.util.AuthContextHolder;
 import com.atguigu.tingshu.model.album.AlbumInfo;
 import com.atguigu.tingshu.model.album.TrackInfo;
 import com.atguigu.tingshu.query.album.TrackInfoQuery;
+import com.atguigu.tingshu.vo.album.AlbumTrackListVo;
 import com.atguigu.tingshu.vo.album.TrackInfoVo;
 import com.atguigu.tingshu.vo.album.TrackListVo;
+import com.atguigu.tingshu.vo.album.TrackStatVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,7 +69,7 @@ public class TrackInfoApiController {
 
 	@Operation(summary = "根据id查询声音")
 	@GetMapping("getTrackInfo/{id}")
-	public Result<TrackInfo> getTrackInfo(@PathVariable("id")Long id){
+	public Result<TrackInfo> getTrackInfo(@PathVariable Long id){
 		TrackInfo trackInfo = this.trackInfoService.getById(id);
 		return Result.ok(trackInfo);
 	}
@@ -86,6 +89,31 @@ public class TrackInfoApiController {
 	public Result removeTrackInfo(@PathVariable Long id){
 		this.trackInfoService.removeTrackInfo(id);
 		return Result.ok();
+	}
+
+
+	@GetMapping("/findAlbumTrackPage/{albumId}/{page}/{limit}")
+	public Result<IPage<AlbumTrackListVo>> findTrackByAlbumIdAndPage(
+			@PathVariable Long albumId,
+			@PathVariable Long page,
+			@PathVariable Long limit){
+		IPage<AlbumTrackListVo> trackListVoIPage = this.trackInfoService.findTrackByAlbumIdAndPage(albumId,new Page<AlbumTrackListVo>(page,limit));
+		return Result.ok(trackListVoIPage);
+
+	}
+
+	@GetMapping("getTrackStatVo/{trackId}")
+	public Result<TrackStatVo> getTrackStatVo(@PathVariable Long trackId){
+		TrackStatVo statVo = this.trackInfoService.getTrackStatVo(trackId);
+		return Result.ok(statVo);
+	}
+
+	@GuiGuLogin(required = false)
+	@Operation(summary = "获取声音播放凭证")
+	@GetMapping("getPlayToken/{trackId}")
+	public Result<Map<String,Object>> getPlayToken(@PathVariable Long trackId){
+		Map<String,Object> map = trackInfoService.getPlayToken(trackId);
+		return Result.ok(map);
 	}
 
 

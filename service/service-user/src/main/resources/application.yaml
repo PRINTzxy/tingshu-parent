@@ -55,6 +55,14 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  rabbitmq:
+    host: 192.168.75.132
+    port: 5672
+    virtual-host: tsadmin
+    username: tsadmin
+    password: tsadmin
+    publisher-confirm-type: correlated
+    publisher-returns: true
 # wechat:
 #   login:
 #     #小程序授权登录

@@ -77,8 +77,8 @@ minio:
   bucketName: sph
 vod:
   appId: 1329013104
-  secretId: #用的时候再加
-  secretKey: #用的时候再加
+  secretId: ######
+  secretKey: #######+
   region: ap-shanghai
   procedure: SimpleAesEncryptPreset #任务流
   tempPath: J:\sgg\tingshuvideotest

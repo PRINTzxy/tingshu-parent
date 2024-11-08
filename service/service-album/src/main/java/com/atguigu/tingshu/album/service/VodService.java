@@ -12,4 +12,6 @@ public interface VodService {
     TrackMediaInfoVo getTrackMediaInfo(String mediaFileId);
 
     void removeTrackMedia(String mediaFileId);
+
+    String getPlayToken(String mediaFileId);
 }

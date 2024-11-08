@@ -13,18 +13,22 @@ import com.atguigu.tingshu.query.album.AlbumInfoQuery;
 import com.atguigu.tingshu.vo.album.AlbumAttributeValueVo;
 import com.atguigu.tingshu.vo.album.AlbumInfoVo;
 import com.atguigu.tingshu.vo.album.AlbumListVo;
+import com.atguigu.tingshu.vo.album.AlbumStatVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,10 +43,13 @@ public class AlbumInfoServiceImpl extends ServiceImpl<AlbumInfoMapper, AlbumInfo
     private AlbumStatMapper albumStatMapper;
 
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void saveAlbumInfo(AlbumInfoVo albumInfoVo) {
+    public void saveAlbumInfo(AlbumInfoVo albumInfoVo) throws FileNotFoundException {
         AlbumInfo albumInfo = new AlbumInfo();
         BeanUtils.copyProperties(albumInfoVo,albumInfo);
 
@@ -120,6 +127,34 @@ public class AlbumInfoServiceImpl extends ServiceImpl<AlbumInfoMapper, AlbumInfo
     @Override
     public List<AlbumInfo> findUserAllAlbumList() {
         return this.list(new LambdaQueryWrapper<AlbumInfo>().eq(AlbumInfo::getUserId,AuthContextHolder.getUserId()==null?1:AuthContextHolder.getUserId()).eq(AlbumInfo::getIsDeleted,0).select(AlbumInfo::getId,AlbumInfo::getAlbumTitle).orderByDesc(AlbumInfo::getId));
+    }
+
+    @Override
+    public IPage<AlbumListVo> findAllAlbumPage(Integer page, Integer limit) {
+        Page<AlbumListVo> ipage = new Page<>(page, limit);
+
+        return this.albumInfoMapper.findUserAlumnPage(ipage, new AlbumInfoQuery());
+    }
+
+    @Override
+    public List<AlbumAttributeValue> findAlbumInfoAttributeValueByAlbumInfoId(Long albumInfoId) {
+        return this.albumAttributeValueMapper.selectList(new LambdaQueryWrapper<AlbumAttributeValue>().eq(AlbumAttributeValue::getAlbumId, albumInfoId));
+    }
+
+    @Override
+    public AlbumStatVo getAlbumStateByAlbumId(Long albumId) {
+        return this.albumStatMapper.getAlbumStateByAlbumId(albumId);
+    }
+
+    @Override
+    public List<Long> findLatelyUpdateAlbum(String startTime, String endTime) {
+        List<AlbumStat> collect = albumStatMapper.selectList(new LambdaQueryWrapper<AlbumStat>().ge(AlbumStat::getUpdateTime, startTime).le(AlbumStat::getUpdateTime, endTime).select(AlbumStat::getAlbumId));
+        return collect.stream().distinct().map(AlbumStat::getAlbumId).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AlbumStatVo> findAlbumStatVoList(List<Long> albumIds) {
+        return this.albumStatMapper.findAlbumStatVoList(albumIds);
     }
 
 

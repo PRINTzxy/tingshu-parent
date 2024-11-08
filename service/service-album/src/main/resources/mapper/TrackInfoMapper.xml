@@ -27,5 +27,28 @@
         group by ti.id
         order by ti.id desc
     </select>
+    <select id="findTrackByAlbumIdAndPage" resultType="com.atguigu.tingshu.vo.album.AlbumTrackListVo">
+        select
+            track_id, track_title, media_duration, order_num, create_time,
+            MAX(IF(stat_type = '0701', stat_num, 0)) as playStatNum,
+            MAX(IF(stat_type = '0704', stat_num, 0)) as commentStatNum
+        from
+            (select track.id as track_id, track_title, media_duration, order_num, track.create_time, stat.stat_type, stat.stat_num
+             from track_info track
+                      left join track_stat stat on stat.track_id = track.id
+             where track.album_id = #{albumId} and track.is_open = '1' and track.status = '0501') v
+        group by v.track_id
+        order by v.order_num asc
+    </select>
+    <select id="getTrackStatVo" resultType="com.atguigu.tingshu.vo.album.TrackStatVo">
+        select
+            max(if(stat.stat_type='0701', stat.stat_num, 0)) playStatNum,
+            max(if(stat.stat_type='0702', stat.stat_num, 0)) collectStatNum,
+            max(if(stat.stat_type='0703', stat.stat_num, 0)) praiseStatNum,
+            max(if(stat.stat_type='0704', stat.stat_num, 0)) commentStatNum
+        from track_stat stat
+        where stat.track_id=#{trackId} and stat.is_deleted=0
+        group by stat.track_id
+    </select>
 </mapper>
 

@@ -1,3 +1,5 @@
+package com.atguigu.tingshu.model.live;
+
 import com.atguigu.tingshu.model.live.FromUser;
 import lombok.Data;
 import lombok.Getter;
@@ -16,6 +18,8 @@ public class SocketMsg {
         JOIN_CHAT("2","加入直播间"),
         CLOSE_SOCKET("3","退出直播间"),
         TOKEN_INVALID("-1","token无效"),
+        GIFT_MSG("4","礼物消息"),
+        PRAISE_MSG("5","点赞消息"),
         ;
 
         private String code;

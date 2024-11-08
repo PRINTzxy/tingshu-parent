@@ -22,6 +22,7 @@
         <module name="service-order" />
         <module name="service-live" />
         <module name="service-user" />
+        <module name="rabbit-util" />
         <module name="spring-security" />
         <module name="service-search" />
         <module name="model" />
@@ -40,6 +41,7 @@
       <module name="common-util" options="-parameters" />
       <module name="kafka-util" options="-parameters" />
       <module name="model" options="-parameters" />
+      <module name="rabbit-util" options="-parameters" />
       <module name="server-gateway" options="-parameters" />
       <module name="service" options="-parameters" />
       <module name="service-account" options="-parameters" />

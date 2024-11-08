@@ -1,9 +1,9 @@
 package com.atguigu.tingshu.common.constant;
 
-public class RedisConstant {
+public class  RedisConstant {
 
     public static final String ALBUM_INFO_PREFIX = "album:info:";
-    public static final String ALBUM_LOCK_SUFFIX = "album:lock:";
+    public static final String ALBUM_LOCK_PREFIX = "album:lock:";
 
     //单位：秒
     //单位：秒 尝试获取锁的最大等待时间
@@ -44,4 +44,8 @@ public class RedisConstant {
     public static final String RANKING_KEY_PREFIX = "ranking:";
     public static final String ALBUM_STAT_ENDTIME = "album:stat:endTime";
 
+    public static final String LIVE_CHAT_CHANNEL = "live:chat:channel";
+
+    public static final String USER_PROCESS_PREFIX = "user:process:";
+    public static final String TRACK_STAT_PREFIX = "track:stat:";
 }

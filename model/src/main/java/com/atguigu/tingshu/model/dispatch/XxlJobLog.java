@@ -4,6 +4,8 @@ import com.atguigu.tingshu.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.Data;
 
 @Data
@@ -14,8 +16,8 @@ public class XxlJobLog extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	@Schema(description = "任务配置id")
-	@TableField("job_config_id")
-	private Long jobConfigId;
+	@TableField("job_id")
+	private Long jobId;
 
 	@Schema(description = "任务状态    0：失败    1：成功")
 	@TableField("status")
@@ -28,5 +30,6 @@ public class XxlJobLog extends BaseEntity {
 	@Schema(description = "耗时(单位：毫秒)")
 	@TableField("times")
 	private Integer times;
+
 
 }

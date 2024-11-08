@@ -69,41 +69,4 @@ public class WxLogin implements ILogin{
         return map;
     }
 
-    /*@Override
-    public Map<String, Object> login(LoginAccount account) throws WxErrorException {
-        // 1.根据code appid和appsecret调用微信接口 获取openId
-        WxMaJscode2SessionResult sessionInfo = this.wxMaService.getUserService().getSessionInfo(account.getCode());
-        String openid = sessionInfo.getOpenid();
-        // 如果获取失败，重新回调登录页面
-        if (StringUtils.isBlank(openid)){
-            throw new GuiguException(ResultCodeEnum.LOGIN_AUTH);
-        }
-
-        // 2.根据openId查询用户
-        UserInfo userInfo = this.userInfoMapper.selectOne(new LambdaQueryWrapper<UserInfo>().eq(UserInfo::getWxOpenId, openid));
-        if (userInfo == null){
-            // 3.隐式注册
-            userInfo = new UserInfo();
-            userInfo.setWxOpenId(openid);
-            userInfo.setNickname("用户" + +this.redisTemplate.opsForValue().increment(RedisConstant.USER_NICKNAME_KEY));
-            userInfo.setAvatarUrl("https://lovecards.yny84666.website/storage/image/20241018/36b0046bc06142d2a0dc5c8c24fef6fe.jpg");
-            userInfo.setStatus("1");
-            this.userInfoMapper.insert(userInfo);
-            // 初始化账户信息
-            this.userAccountFeignClient.init(userInfo.getId());
-
-//			int i = 1/0;
-        }
-
-        // 4.生成uuid作为token，保存到redis中
-        String token = UUID.randomUUID().toString();
-        UserInfoVo userInfoVo = new UserInfoVo();
-        BeanUtils.copyProperties(userInfo, userInfoVo);
-        this.redisTemplate.opsForValue().set(RedisConstant.USER_LOGIN_KEY_PREFIX + token, userInfoVo, RedisConstant.USER_LOGIN_KEY_TIMEOUT, TimeUnit.SECONDS);
-
-        // 5.返回token
-        Map<String, Object> map = new HashMap<>();
-        map.put("token", token);
-        return map;
-    }*/
 }

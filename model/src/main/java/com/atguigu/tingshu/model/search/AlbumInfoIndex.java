@@ -24,12 +24,15 @@ public class AlbumInfoIndex implements Serializable {
     private Long id;
 
     //  es 中能分词的字段，这个字段数据类型必须是 text！keyword 不分词！ analyzer = "ik_max_word"
+    //专辑标题
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String albumTitle;
 
+    //专辑简介
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String albumIntro;
 
+    //主播名称
     @Field(type = FieldType.Keyword)
     private String announcerName;
 
@@ -42,15 +45,17 @@ public class AlbumInfoIndex implements Serializable {
     private Integer includeTrackCount;
 
     //专辑是否完结：0-否；1-完结
-    @Field(type = FieldType.Long, index = false)
+    //@Field(type = FieldType.Long, index = false)
+    @Field(type = FieldType.Long)
     private String isFinished;
 
     //付费类型：免费、vip免费、付费
-    @Field(type = FieldType.Keyword, index = false)
+    //@Field(type = FieldType.Keyword, index = false)
+    @Field(type = FieldType.Keyword)
     private String payType;
 
     @Field(type = FieldType.Date,format = DateFormat.date_time, pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime; //
+    private Date createTime;
 
     @Field(type = FieldType.Long)
     private Long category1Id;

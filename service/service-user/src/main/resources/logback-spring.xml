@@ -4,7 +4,7 @@
     <contextName>logback</contextName>
 
     <!-- 日志的输出目录 -->
-    <property name="log.path" value="D://work//tingshu_work//logs" />
+    <property name="log.path" value="J://work//tingshu_work//logs" />
 
     <!--控制台日志格式：彩色日志-->
     <!-- magenta:洋红 -->

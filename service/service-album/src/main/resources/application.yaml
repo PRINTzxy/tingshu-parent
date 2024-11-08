@@ -34,21 +34,21 @@ spring:
           max-wait: -1    #最大阻塞等待时间(负数表示没限制)
           max-idle: 5    #最大空闲
           min-idle: 0     #最小空闲
-  kafka:
-    bootstrap-servers: 39.98.123.211:9092
-    producer:
-      retries: 3  #设置大于0的值，则客户端会将发送失败的记录重新发送
-      acks: 1
-      batch-size: 16384
-      buffer-memory: 33554432
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    consumer:
-      group-id: service-album
-      enable-auto-commit: true
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#  kafka:
+#    bootstrap-servers: 39.98.123.211:9092
+#    producer:
+#      retries: 3  #设置大于0的值，则客户端会将发送失败的记录重新发送
+#      acks: 1
+#      batch-size: 16384
+#      buffer-memory: 33554432
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#    consumer:
+#      group-id: service-album
+#      enable-auto-commit: true
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -70,6 +70,12 @@ spring:
     multipart:
       max-file-size: 10MB     #单个文件最大限制
       max-request-size: 20MB  #多个文件最大限制
+  rabbitmq:
+    host: 192.168.75.132
+    port: 5672
+    virtual-host: tsadmin
+    username: tsadmin
+    password: tsadmin
 minio:
   endpointUrl: http://192.168.75.132:9000
   accessKey: minioadmin
@@ -77,8 +83,8 @@ minio:
   bucketName: sph
 vod:
   appId: 1329013104
-  secretId: #用的时候再加
-  secretKey: #用的时候再加
+  secretId: #####
+  secretKey: ######
   region: ap-shanghai
   procedure: SimpleAesEncryptPreset #任务流
   tempPath: J:\sgg\tingshuvideotest

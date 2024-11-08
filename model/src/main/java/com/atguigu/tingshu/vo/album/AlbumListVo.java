@@ -3,6 +3,8 @@ package com.atguigu.tingshu.vo.album;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 @Schema(description = "用户专辑列表信息")
 public class AlbumListVo {
@@ -37,5 +39,22 @@ public class AlbumListVo {
 	@Schema(description = "评论数")
 //	private Integer albumCommentStatNum;
 	private Integer commentStatNum;
+
+	///////////////////新增////////////////////////
+
+	@Schema(description = "简介")
+	private String albumIntro;
+
+	@Schema(description = "主播id")
+	private Long userId;
+
+	@Schema(description = "三级分类id")
+	private Long category3Id;
+
+	@Schema(description = "付费类型")
+	private String payType;
+
+	@Schema(description = "创建时间")
+	private Date createTime;
 
 }

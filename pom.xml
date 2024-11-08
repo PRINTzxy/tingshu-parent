@@ -21,6 +21,7 @@
         <module>service</module>
         <module>server-gateway</module>
         <module>service-client</module>
+        <module>common/rabbit-util</module>
     </modules>
 
     <properties>
@@ -36,7 +37,7 @@
         <jodatime.version>2.10.1</jodatime.version>
         <xxl-job.version>2.4.0</xxl-job.version>
         <wxpay.version>0.2.9</wxpay.version>
-        <redisson.version>3.20.0</redisson.version>
+        <redisson.version>3.33.0</redisson.version>
         <guava.version>23.0</guava.version>
         <pinyin4j.version>2.5.0</pinyin4j.version>
         <spring-kafka.version>3.0.4</spring-kafka.version>
@@ -125,6 +126,11 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>3.23.3</version>
             </dependency>
 
             <!-- list集合拆分 -->
